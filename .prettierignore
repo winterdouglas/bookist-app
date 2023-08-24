@@ -1,0 +1,7 @@
+.bundle
+.yarn
+android
+ios
+vendor
+assets
+coverage
