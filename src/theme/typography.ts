@@ -20,8 +20,8 @@ export const typography = {
    * The primary font. Used in most places.
    */
   primary: Platform.select({
+    // TODO: Configure fonts appropriately
     ios: fonts.avenirNext,
-    // TODO: Check what to do with Android
     android: fonts.sansSerif,
   }),
 };

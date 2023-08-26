@@ -9,7 +9,11 @@ jest.mock("react-i18next", () => ({
     return {
       t: (key: string) => key,
       i18n: {
-        changeLanguage: () => new Promise(() => {}),
+        changeLanguage: () =>
+          new Promise<void>((resolve) => {
+            console.warn("This is mocked and doesn't have any effect.");
+            resolve();
+          }),
       },
     };
   },
