@@ -1,3 +1,5 @@
+import "@testing-library/jest-native/extend-expect";
+
 // libraries to mock
 jest.mock("react-native-config", () => ({
   API_URL: "",
@@ -24,5 +26,3 @@ jest.mock("react-i18next", () => ({
 }));
 
 jest.useFakeTimers();
-
-export {};
