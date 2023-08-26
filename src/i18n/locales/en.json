@@ -1,0 +1,11 @@
+{
+  "common": {
+    "loading": "Loading..."
+  },
+  "error": {
+    "title": "Something went wrong!",
+    "subtitle": "Oops... It looks like something unexpected happened.",
+    "unknown": "Unknown error",
+    "reset": "Reset the app"
+  }
+}
