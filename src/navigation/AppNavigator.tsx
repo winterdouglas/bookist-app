@@ -4,7 +4,7 @@ import {
   createNativeStackNavigator,
   type NativeStackScreenProps,
 } from "@react-navigation/native-stack";
-import { View } from "react-native";
+import { SearchScreen } from "@/screens/Search/SearchScreen";
 
 /**
  * This type allows TypeScript to know what routes are defined in the navigator.
@@ -13,7 +13,7 @@ import { View } from "react-native";
  * @see https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
-  Home: undefined;
+  Search: undefined;
 };
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> =
@@ -26,8 +26,8 @@ const Stack = createNativeStackNavigator<AppStackParamList>();
 
 const AppStack = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={View} />
+    <Stack.Navigator initialRouteName="Search">
+      <Stack.Screen name="Search" component={SearchScreen} />
     </Stack.Navigator>
   );
 };

@@ -1,7 +1,8 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { searchApi } from "@/features/search/services/searchApi";
 
 const reducer = combineReducers({
-  // TODO
+  [searchApi.reducerPath]: searchApi.reducer,
 });
 
 export const setupStore = () => {
@@ -10,8 +11,7 @@ export const setupStore = () => {
     // Adding the api middleware enables caching, invalidation, polling,
     // and other useful features of `rtk-query`.
     middleware: (getDefaultMiddleware) =>
-      // TODO
-      getDefaultMiddleware().concat(),
+      getDefaultMiddleware().concat(searchApi.middleware),
   });
 };
 
