@@ -9,6 +9,7 @@ export const lightTheme: ExtendedTheme = {
   colors: {
     ...DefaultTheme.colors,
 
+    textDim: "#666666",
     onPrimary: "#FFFFFF",
     secondary: "#AED7A0",
     onSecondary: "#FFFFFF",
@@ -23,6 +24,7 @@ export const darkTheme: ExtendedTheme = {
   colors: {
     ...DarkTheme.colors,
 
+    textDim: "#A0A0A0",
     onPrimary: "#000000",
     secondary: "#AED7A0",
     onSecondary: "#000000",

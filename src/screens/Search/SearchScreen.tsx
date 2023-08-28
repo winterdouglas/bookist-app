@@ -1,16 +1,16 @@
-import { useSearchBooksQuery } from "@/features/search/services/searchApi";
-import { View, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { SearchBar } from "@/components/SearchBar";
 
 export const SearchScreen = () => {
-  const { status, data } = useSearchBooksQuery({
-    q: "lord of the rings",
-    page: 9,
-  });
-
   return (
-    <View>
-      <Text>Result: {status}</Text>
-      <Text>Count: {JSON.stringify(data, null, 2)}</Text>
+    <View style={styles.container}>
+      <SearchBar selectTextOnFocus />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

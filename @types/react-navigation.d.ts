@@ -22,6 +22,10 @@ declare module "@react-navigation/native" {
        */
       text: string;
       /**
+       * The text color of placeholders and less important texts
+       */
+      textDim: string;
+      /**
        * The color of borders, e.g. header border, tab bar border etc.
        */
       border: string;
