@@ -1,9 +1,10 @@
 import { ComponentProps } from "react";
-import { NavigationContainer, useTheme } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import {
   createNativeStackNavigator,
   type NativeStackScreenProps,
 } from "@react-navigation/native-stack";
+import { useTheme } from "@/hooks/useTheme";
 import { SearchScreen } from "@/screens/Search/SearchScreen";
 
 /**
