@@ -1,20 +1,34 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { searchApi } from "@/features/search/services/searchApi";
+import {
+  combineReducers,
+  configureStore,
+  createAsyncThunk,
+} from "@reduxjs/toolkit";
+import { searchSlice } from "@/features/search/store/searchSlice";
 
 const reducer = combineReducers({
-  [searchApi.reducerPath]: searchApi.reducer,
+  search: searchSlice.reducer,
 });
 
 export const setupStore = () => {
   return configureStore({
     reducer,
-    // Adding the api middleware enables caching, invalidation, polling,
-    // and other useful features of `rtk-query`.
-    middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(searchApi.middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   });
 };
 
 export type RootState = ReturnType<typeof reducer>;
 export type AppStore = ReturnType<typeof setupStore>;
 export type AppDispatch = AppStore["dispatch"];
+
+export type AppAsyncThunkConfig<TExtra = unknown, TRejectedValue = unknown> = {
+  state: RootState;
+  dispatch: AppDispatch;
+  extra?: TExtra;
+  rejectValue?: TRejectedValue;
+  serializedErrorType?: unknown;
+  pendingMeta?: unknown;
+  fulfilledMeta?: unknown;
+  rejectedMeta?: unknown;
+};
+
+export type RequestStatus = "pending" | "fulfilled" | "rejected";

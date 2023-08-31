@@ -28,17 +28,18 @@ export const SearchBar = ({
   const placeholder = inputPlaceholder ?? t("search");
 
   return (
-    <View {...props} style={[styles.container, style]}>
+    <View style={[styles.container, style]}>
+      <TextInput
+        underlineColorAndroid="transparent"
+        placeholderTextColor={colors.textDim}
+        {...props}
+        placeholder={placeholder}
+        style={[styles.input, inputStyle, { color: colors.text }]}
+      />
       <Icon
         style={{ color: colors.textDim }}
         name="search"
         size={spacing.extraLarge}
-      />
-      <TextInput
-        underlineColorAndroid="transparent"
-        placeholder={placeholder}
-        placeholderTextColor={colors.textDim}
-        style={[styles.input, inputStyle, { color: colors.text }]}
       />
     </View>
   );
@@ -52,5 +53,6 @@ const styles = StyleSheet.create({
   },
   input: {
     padding: spacing.extraSmall,
+    flex: 1,
   },
 });

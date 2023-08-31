@@ -1,10 +1,10 @@
 import { View, StyleSheet } from "react-native";
-import { SearchBar } from "@/components/SearchBar";
+import { SearchList } from "@/features/search/components/SearchList";
 
 export const SearchScreen = () => {
   return (
     <View style={styles.container}>
-      <SearchBar selectTextOnFocus />
+      <SearchList />
     </View>
   );
 };

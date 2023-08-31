@@ -11,4 +11,4 @@ export const searchApi = api.injectEndpoints({
   }),
 });
 
-export const { useSearchBooksQuery } = searchApi;
+export const { useSearchBooksQuery, useLazySearchBooksQuery } = searchApi;
