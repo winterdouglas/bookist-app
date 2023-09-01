@@ -50,7 +50,7 @@ export const searchBooks = createAsyncThunk<
       const status = selectStatusBySearchTerm(state, searchTerm);
       const allFetched = selectAllFetchedBySearchTerm(state, searchTerm);
 
-      return status !== "pending" && !allFetched;
+      return searchTerm.length >= 3 && status !== "pending" && !allFetched;
     },
   },
 );
@@ -71,6 +71,7 @@ export const searchSlice = createSlice({
       const searchTerm = action.meta.arg;
       const { results, page } = action.payload;
 
+      // TODO: Check
       state.dataBySearchTerm[searchTerm] = {
         page: results.length > 0 ? page + 1 : page,
         allFetched: results.length === 0,
@@ -110,11 +111,14 @@ export const selectAllPagesBySearchTerm = createSelector(
       return [];
     }
 
-    return Object.entries(data.pages).reduce((acc, [currKey, currValue]) => {
-      if (parseInt(currKey, 10) <= page) {
-        acc = [...acc, ...currValue];
-      }
-      return acc;
-    }, [] as SearchResult[]);
+    return Object.entries(data.pages)
+      .map(([key, value]) => [parseInt(key, 10), value] as const)
+      .sort(([k1], [k2]) => k1 - k2)
+      .reduce((acc, [currKey, currValue]) => {
+        if (currKey <= page) {
+          acc = [...acc, ...currValue];
+        }
+        return acc;
+      }, [] as SearchResult[]);
   },
 );
