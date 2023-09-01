@@ -73,10 +73,17 @@ export const searchSlice = createSlice({
 
       // TODO: Check
       state.dataBySearchTerm[searchTerm] = {
+        ...(state.dataBySearchTerm[searchTerm] ?? {}),
         page: results.length > 0 ? page + 1 : page,
         allFetched: results.length === 0,
-        lastRequestedTime: { [page]: Date.now() },
-        pages: { [page]: results },
+        lastRequestedTime: {
+          ...(state.dataBySearchTerm[searchTerm]?.lastRequestedTime ?? {}),
+          [page]: Date.now(),
+        },
+        pages: {
+          ...(state.dataBySearchTerm[searchTerm]?.pages ?? {}),
+          [page]: results,
+        },
       };
       state.statusBySearchTerm[searchTerm] = action.meta.requestStatus;
     });
