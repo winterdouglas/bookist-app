@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SearchBar } from "@/components/SearchBar";
-import { useDebouncedSearch } from "@/features/search/hooks/useDebouncedSearch";
+import { useDebounce } from "@/hooks/useDebounce";
 
 export type DebouncedSearchBarProps = {
   onSearch?: (searchTerm: string) => void;
@@ -8,8 +8,14 @@ export type DebouncedSearchBarProps = {
 
 export const DebouncedSearchBar = ({ onSearch }: DebouncedSearchBarProps) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const debouncedSearchTerm = useDebounce(searchTerm);
 
-  useDebouncedSearch(searchTerm, onSearch);
+  useEffect(() => {
+    onSearch?.(debouncedSearchTerm);
+
+    // Not ideal, but since we don't have useEffectEvent available yet, it's a tradeoff to make it simple
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedSearchTerm]);
 
   return (
     <SearchBar
