@@ -11,26 +11,9 @@ type Sizes = keyof typeof $sizeStyles;
 type Presets = keyof typeof $presets;
 
 export type TextProps = RNTextProps & {
-  /**
-   * The text to be displayed. When set it gains precedence over children
-   */
   text?: string;
-  /**
-   * Style override
-   */
-  style?: StyleProp<TextStyle>;
-  /**
-   * The visual preset
-   */
   preset?: Presets;
-  /**
-   * Font size override
-   */
   size?: Sizes;
-  /**
-   * Children, can be used to nest text (as a span). When text is set it takes precedence
-   * over this
-   */
   children?: ReactNode;
 };
 
@@ -53,7 +36,7 @@ export const Text = ({
   ];
 
   return (
-    <RNText {...rest} style={$styles}>
+    <RNText selectable {...rest} style={$styles}>
       {content}
     </RNText>
   );

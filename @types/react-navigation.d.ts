@@ -65,6 +65,6 @@ declare module "@react-navigation/native" {
 
 declare global {
   namespace ReactNavigation {
-    type RootParamList = AppStackParamList;
+    interface RootParamList extends AppStackParamList {}
   }
 }

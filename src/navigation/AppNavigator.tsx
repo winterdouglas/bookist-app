@@ -6,6 +6,7 @@ import {
 } from "@react-navigation/native-stack";
 import { useTheme } from "@/hooks/useTheme";
 import { SearchScreen } from "@/screens/Search";
+import { SearchResultDetailsScreen } from "@/screens/SearchResultDetails/SearchResultDetails";
 
 /**
  * This type allows TypeScript to know what routes are defined in the navigator.
@@ -15,6 +16,12 @@ import { SearchScreen } from "@/screens/Search";
  */
 export type AppStackParamList = {
   Search: undefined;
+  SearchResultDetails: {
+    // searchTerm: string;
+    // page: number;
+    // id: string;
+    coverId?: number;
+  };
 };
 
 export type AppStackScreenProps<T extends keyof AppStackParamList> =
@@ -29,6 +36,15 @@ const AppStack = () => {
   return (
     <Stack.Navigator initialRouteName="Search">
       <Stack.Screen name="Search" component={SearchScreen} />
+      <Stack.Screen
+        name="SearchResultDetails"
+        component={SearchResultDetailsScreen}
+        options={{
+          headerTransparent: true,
+          headerTitle: "",
+          headerBackTitleVisible: false,
+        }}
+      />
     </Stack.Navigator>
   );
 };

@@ -21,10 +21,11 @@ export const useSearchBooks = (searchTerm: string) => {
 
   useEffect(() => {
     // upon mount or name change, if status is uninitialized, send a request
-    // for the pokemon name
-    if (status === undefined) {
-      dispatch(searchBooks(searchTerm));
+    if (status) {
+      return;
     }
+
+    dispatch(searchBooks(searchTerm));
   }, [status, searchTerm, dispatch]);
 
   const loadMore = useCallback(() => {
