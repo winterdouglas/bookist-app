@@ -4,7 +4,8 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import type { AppAsyncThunkConfig, RequestStatus, RootState } from "@/store";
-import { Api, type SearchResult } from "@/services/api";
+import { SearchResult } from "@/features/search/models";
+import { SearchApi } from "@/features/search/services";
 
 type StatusBySearchTerm = Record<string, RequestStatus | undefined>;
 
@@ -41,7 +42,7 @@ export const searchBooks = createAsyncThunk<
       return { results: cachedData, page };
     }
 
-    const result = await Api.searchBooks(searchTerm, page, signal);
+    const result = await SearchApi.searchBooks(searchTerm, page, signal);
     return { results: result.docs, page };
   },
   {

@@ -1,7 +1,3 @@
-export type ApiConfig = {
-  url?: string;
-};
-
 export type SearchResult = {
   key: string;
   type: string;
@@ -12,11 +8,4 @@ export type SearchResult = {
   cover_i?: number;
   language?: string[];
   author_name?: string;
-};
-
-export type SearchResultPage = {
-  numFound: number;
-  start: number;
-  numFoundExact: boolean;
-  docs: SearchResult[];
 };

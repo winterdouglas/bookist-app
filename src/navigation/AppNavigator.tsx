@@ -5,7 +5,7 @@ import {
   type NativeStackScreenProps,
 } from "@react-navigation/native-stack";
 import { useTheme } from "@/hooks/useTheme";
-import { SearchScreen } from "@/screens/Search/SearchScreen";
+import { SearchScreen } from "@/screens/Search";
 
 /**
  * This type allows TypeScript to know what routes are defined in the navigator.

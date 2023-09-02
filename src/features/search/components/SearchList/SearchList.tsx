@@ -1,15 +1,18 @@
 import { useCallback, useEffect, useState } from "react";
 import { ViewProps } from "react-native";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
+import { FlashList } from "@shopify/flash-list";
 import { useAnimatedSearchStyle } from "@/features/search/hooks/useAnimatedSearchStyle";
 import { Text } from "@/components/Text";
-import { DebouncedSearchBar } from "./DebouncedSearchBart";
+import { DebouncedSearchBar } from "@/components/DebouncedSearchBar";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
+import { useAppSelector } from "@/hooks/useAppSelector";
 import {
   searchBooks,
   selectAllPagesBySearchTerm,
-} from "../../store/searchSlice";
-import { useAppSelector } from "@/hooks/useAppSelector";
-import Animated from "react-native-reanimated";
+} from "@/features/search/store/searchSlice";
+import { SearchResult } from "@/features/search/models";
+import { useSearchBooks } from "@/features/search/hooks/useSearchBooks";
 
 export type SearchListProps = ViewProps;
 
@@ -18,23 +21,7 @@ export const SearchList = (props: SearchListProps) => {
   const { animatedStyles, animateSearch, resetAnimation } =
     useAnimatedSearchStyle();
 
-  const dispatch = useAppDispatch();
-  const data = useAppSelector((state) =>
-    selectAllPagesBySearchTerm(state, searchTerm),
-  );
-
-  const handleSearch = useCallback(
-    (term: string) => {
-      setSearchTerm(term);
-
-      dispatch(searchBooks(term));
-    },
-    [dispatch],
-  );
-
-  const handleLoadMore = () => {
-    dispatch(searchBooks(searchTerm));
-  };
+  const { data, loadMore } = useSearchBooks(searchTerm);
 
   useEffect(() => {
     if (data.length > 0) {
@@ -45,14 +32,26 @@ export const SearchList = (props: SearchListProps) => {
   }, [animateSearch, resetAnimation, data.length]);
 
   return (
-    <Animated.FlatList
+    <FlashList
       {...props}
       keyExtractor={(i) => i.key}
-      ListHeaderComponent={<DebouncedSearchBar onSearch={handleSearch} />}
+      ListHeaderComponent={<DebouncedSearchBar onSearch={setSearchTerm} />}
+      estimatedItemSize={40}
       data={data}
-      renderItem={({ item }) => <Text text={item.title} />}
-      style={[props.style, animatedStyles]}
-      onEndReached={handleLoadMore}
+      renderItem={({ item }) => <Item item={item} />}
+      // contentContainerStyle={[props.style, animatedStyles]}
+      onEndReached={loadMore}
     />
+  );
+};
+
+const Item = ({ item }: { item: SearchResult }) => {
+  return (
+    <Animated.View
+      style={{ height: 40, alignItems: "center" }}
+      entering={FadeIn}
+      exiting={FadeOut}>
+      <Text text={item.title} />
+    </Animated.View>
   );
 };

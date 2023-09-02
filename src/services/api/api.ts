@@ -1,7 +1,10 @@
 import axios, { AxiosRequestConfig } from "axios";
 
 import { Config } from "@/config";
-import { ApiConfig, SearchResultPage } from "./api.types";
+
+export type ApiConfig = {
+  url?: string;
+};
 
 const DefaultApiConfig: ApiConfig = {
   url: Config.API_URL,
@@ -16,33 +19,27 @@ const createClient = ({ url }: ApiConfig) => {
   });
 };
 
-export const apiClient = (config: ApiConfig = DefaultApiConfig) => {
+export const createApi = (config: ApiConfig = DefaultApiConfig) => {
   const client = createClient(config);
 
-  const searchBooks = async (
-    searchTerm: string,
-    page: number,
-    cancelSignal?: AxiosRequestConfig["signal"],
+  const get = async <T>(
+    url: string,
+    reqConfig?: Pick<AxiosRequestConfig, "params" | "headers" | "signal">,
   ) => {
     try {
-      const response = await client.get<SearchResultPage>("/search.json", {
-        params: {
-          q: searchTerm,
-          page: page,
-        },
-        signal: cancelSignal,
-      });
+      const response = await client.get<T>(url, reqConfig);
       return response.data;
     } catch (error) {
       if (__DEV__) {
-        console.log("Search error", error);
+        console.log("Api Error", error);
       }
 
+      // TODO: Rethrow a managed error
       throw error;
     }
   };
 
-  return { searchBooks };
+  return { get };
 };
 
-export const Api = apiClient();
+export const Api = createApi();

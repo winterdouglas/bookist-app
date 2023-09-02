@@ -1,8 +1,4 @@
-import {
-  combineReducers,
-  configureStore,
-  createAsyncThunk,
-} from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { searchSlice } from "@/features/search/store/searchSlice";
 
 const reducer = combineReducers({
