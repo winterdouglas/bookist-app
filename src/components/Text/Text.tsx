@@ -43,8 +43,8 @@ export const Text = ({
 };
 
 const $sizeStyles = {
-  lg: { fontSize: 20 } as TextStyle,
-  md: { fontSize: 18 } as TextStyle,
+  lg: { fontSize: 28 } as TextStyle,
+  md: { fontSize: 20 } as TextStyle,
   sm: { fontSize: 16 } as TextStyle,
   xs: { fontSize: 12 } as TextStyle,
 };
@@ -64,7 +64,7 @@ const $presets = {
   subheading: [
     $baseStyle,
     $sizeStyles.md,
-    { fontWeight: 700 },
+    { fontWeight: 900 },
   ] as StyleProp<TextStyle>,
   list: [$baseStyle, { fontWeight: 600 }] as StyleProp<TextStyle>,
   subtitle: [

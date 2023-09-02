@@ -1,6 +1,6 @@
+import { FC } from "react";
 import { StyleSheet, TouchableHighlight, View } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
-import { useNavigation } from "@react-navigation/native";
 import { BookCoverImage } from "@/features/search/components/BookCoverImage";
 import { useTheme } from "@/hooks/useTheme";
 import { spacing } from "@/theme";
@@ -10,16 +10,16 @@ import { BookFirstPublishedIn } from "@/features/search/components/BookFirstPubl
 import { BookAuthors } from "@/features/search/components/BookAuthors";
 import { BookTitle } from "@/features/search/components/BookTitle";
 
-export const BookCell = ({ item }: { item: SearchResult }) => {
+export const BookCell: FC<{
+  item: SearchResult;
+  onPress?: (id: string) => void;
+}> = ({ item, onPress }) => {
   const { colors } = useTheme();
-  const navigation = useNavigation();
 
   return (
     <TouchableHighlight
       underlayColor={colors.border}
-      onPress={() =>
-        navigation.navigate("SearchResultDetails", { coverId: item.cover_i })
-      }>
+      onPress={() => onPress?.(item.key)}>
       <Animated.View
         entering={FadeIn}
         exiting={FadeOut}

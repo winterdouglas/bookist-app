@@ -12,7 +12,7 @@ type StatusBySearchTerm = Record<string, RequestStatus | undefined>;
 type DataBySearchTerm = Record<
   string,
   | {
-      page: number;
+      nextPage: number;
       allFetched: boolean;
       lastRequestedTime?: Record<number, number>;
       pages: Record<number, SearchResult[]>;
@@ -20,13 +20,15 @@ type DataBySearchTerm = Record<
   | undefined
 >;
 
-type SearchBooksResult = {
+type ItemPageBySearchTerm = Record<string, Record<string, number>>;
+
+type SearchBooksThunkResult = {
   results: SearchResult[];
   page: number;
 };
 
 export const searchBooks = createAsyncThunk<
-  SearchBooksResult,
+  SearchBooksThunkResult,
   string,
   AppAsyncThunkConfig
 >(
@@ -36,6 +38,7 @@ export const searchBooks = createAsyncThunk<
     const page = selectPageBySearchTerm(state, searchTerm);
     const data = selectDataBySearchTerm(state, searchTerm);
 
+    // TODO: Cache by date
     const cachedData = data?.pages[page];
     if (cachedData) {
       // Use cached data
@@ -61,6 +64,7 @@ export const searchSlice = createSlice({
   initialState: {
     dataBySearchTerm: {} as DataBySearchTerm,
     statusBySearchTerm: {} as StatusBySearchTerm,
+    itemPageBySearchTerm: {} as ItemPageBySearchTerm,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -71,11 +75,12 @@ export const searchSlice = createSlice({
     builder.addCase(searchBooks.fulfilled, (state, action) => {
       const searchTerm = action.meta.arg;
       const { results, page } = action.payload;
+      const nextPage = results.length > 0 ? page + 1 : page;
 
       // TODO: Check
       state.dataBySearchTerm[searchTerm] = {
         ...(state.dataBySearchTerm[searchTerm] ?? {}),
-        page: results.length > 0 ? page + 1 : page,
+        nextPage: nextPage,
         allFetched: results.length === 0,
         lastRequestedTime: {
           ...(state.dataBySearchTerm[searchTerm]?.lastRequestedTime ?? {}),
@@ -87,6 +92,13 @@ export const searchSlice = createSlice({
         },
       };
       state.statusBySearchTerm[searchTerm] = action.meta.requestStatus;
+      state.itemPageBySearchTerm[searchTerm] = results.reduce(
+        (acc, current) => {
+          acc = { ...acc, [current.key]: page };
+          return acc;
+        },
+        state.itemPageBySearchTerm[searchTerm] as Record<string, number>,
+      );
     });
     builder.addCase(searchBooks.rejected, (state, action) => {
       const searchTerm = action.meta.arg;
@@ -96,7 +108,7 @@ export const searchSlice = createSlice({
 });
 
 export const selectPageBySearchTerm = (state: RootState, searchTerm: string) =>
-  state.search.dataBySearchTerm[searchTerm]?.page ?? 1;
+  state.search.dataBySearchTerm[searchTerm]?.nextPage ?? 1;
 
 export const selectAllFetchedBySearchTerm = (
   state: RootState,
@@ -130,3 +142,20 @@ export const selectAllPagesBySearchTerm = createSelector(
       }, [] as SearchResult[]);
   },
 );
+
+export const selectSearchResultPage = (
+  state: RootState,
+  searchTerm: string,
+  itemId: string,
+) => state.search.itemPageBySearchTerm[searchTerm]?.[itemId];
+
+export const selectSearchResult = (
+  state: RootState,
+  searchTerm: string,
+  page: number,
+  itemId: string,
+) =>
+  // TODO: Make the stored data keyed
+  state.search.dataBySearchTerm[searchTerm]?.pages[page]?.find(
+    (x) => x.key === itemId,
+  );

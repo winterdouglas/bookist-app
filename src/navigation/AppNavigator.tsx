@@ -17,10 +17,8 @@ import { SearchResultDetailsScreen } from "@/screens/SearchResultDetails/SearchR
 export type AppStackParamList = {
   Search: undefined;
   SearchResultDetails: {
-    // searchTerm: string;
-    // page: number;
-    // id: string;
-    coverId?: number;
+    searchTerm: string;
+    id: string;
   };
 };
 
