@@ -12,6 +12,7 @@ import { spacing } from "@/theme";
 import { useTheme } from "@/hooks/useTheme";
 import { useTranslation } from "react-i18next";
 import { getColorFromSeed } from "@/utils/getColorFromSeed";
+import { unique } from "@/utils/array";
 
 export type SearchListProps = ViewProps;
 
@@ -88,10 +89,11 @@ const BookCell = ({ item }: { item: SearchResult }) => {
 };
 
 const BookAuthors: FC<{ authors?: string[] }> = ({ authors = [] }) => {
+  const uniqueAuthors = unique(authors);
   return (
     !!authors.length && (
       <>
-        {[...new Set(authors)].map((author) => (
+        {uniqueAuthors.map((author) => (
           <Text
             key={author}
             text={author}
@@ -120,10 +122,12 @@ const BookFirstPublishedIn: FC<{ year?: number }> = ({ year = 0 }) => {
   );
 };
 
-const BookLanguages: FC<{ languages?: string[] }> = ({ languages = [] }) => {
+const BookLanguages: FC<{ languages?: string[]; limit?: number }> = ({
+  languages = [],
+  limit = 5,
+}) => {
   const { colors } = useTheme();
   const { t } = useTranslation();
-  const limit = 5;
 
   const displayedLanguages =
     languages && languages.length > limit
@@ -146,6 +150,7 @@ const BookLanguages: FC<{ languages?: string[] }> = ({ languages = [] }) => {
         }}>
         {displayedLanguages.map((language) => (
           <View
+            key={language}
             style={{
               margin: spacing.micro,
               padding: spacing.tiny,
@@ -161,9 +166,12 @@ const BookLanguages: FC<{ languages?: string[] }> = ({ languages = [] }) => {
         ))}
         {!!remainingLanguages && (
           <Text
+            style={{
+              marginLeft: spacing.tiny,
+              color: colors.textDim,
+            }}
             preset="subtitle"
             text={remainingLanguages}
-            style={{ color: colors.textDim }}
           />
         )}
       </View>
