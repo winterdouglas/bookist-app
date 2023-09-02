@@ -33,13 +33,15 @@ export const SearchableList = (props: SearchListProps) => {
 
   return (
     <>
-      <DebouncedSearchInput onSearch={setSearchTerm} />
+      <DebouncedSearchInput
+        style={{ margin: spacing.medium }}
+        onSearch={setSearchTerm}
+      />
       <FlatList
         {...props}
         keyExtractor={(i) => i.key}
         data={data}
         renderItem={({ item }) => <BookCell item={item} />}
-        // contentContainerStyle={[props.style, animatedStyles]}
         onEndReached={loadMore}
       />
     </>
@@ -47,6 +49,7 @@ export const SearchableList = (props: SearchListProps) => {
 };
 
 const BookCell = ({ item }: { item: SearchResult }) => {
+  const { colors } = useTheme();
   return (
     <Animated.View
       entering={FadeIn}
@@ -64,18 +67,24 @@ const BookCell = ({ item }: { item: SearchResult }) => {
           alignItems: "center",
         }}>
         {!!item.cover_i && (
-          <AutoImage
+          <View
             style={{
               borderRadius: spacing.medium,
-              overflow: "hidden",
-            }}
-            maxWidth={100}
-            maxHeight={160}
-            source={{
-              uri: `${Config.COVERS_URL}/b/id/${item.cover_i}-M.jpg`,
-              priority: "normal",
-            }}
-          />
+              shadowColor: colors.shadow,
+              shadowOffset: { width: 8, height: 8 },
+              shadowRadius: spacing.medium,
+              shadowOpacity: 0.5,
+            }}>
+            <AutoImage
+              style={{ overflow: "hidden", borderRadius: spacing.medium }}
+              maxWidth={100}
+              maxHeight={160}
+              source={{
+                uri: `${Config.COVERS_URL}/b/id/${item.cover_i}-M.jpg`,
+                priority: "normal",
+              }}
+            />
+          </View>
         )}
       </View>
       <View style={{ gap: spacing.tiny, flex: 1 }}>
