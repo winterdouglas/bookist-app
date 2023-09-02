@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
-import { SearchBar } from "@/components/SearchBar";
+import { SearchInput } from "@/components/SearchInput";
 import { useDebounce } from "@/hooks/useDebounce";
 
-export type DebouncedSearchBarProps = {
+export type DebouncedSearchInputProps = {
   onSearch?: (searchTerm: string) => void;
 };
 
-export const DebouncedSearchBar = ({ onSearch }: DebouncedSearchBarProps) => {
+export const DebouncedSearchInput = ({
+  onSearch,
+}: DebouncedSearchInputProps) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const debouncedSearchTerm = useDebounce(searchTerm);
 
@@ -18,7 +20,7 @@ export const DebouncedSearchBar = ({ onSearch }: DebouncedSearchBarProps) => {
   }, [debouncedSearchTerm]);
 
   return (
-    <SearchBar
+    <SearchInput
       selectTextOnFocus
       value={searchTerm}
       onChangeText={setSearchTerm}

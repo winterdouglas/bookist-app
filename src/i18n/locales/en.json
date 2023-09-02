@@ -1,12 +1,16 @@
 {
   "common": {
     "loading": "Loading...",
-    "search": "Search..."
+    "search": "Search...",
+    "andCountMore": "+{{count}}"
   },
   "error": {
     "title": "Something went wrong!",
     "subtitle": "Oops... It looks like something unexpected happened.",
     "unknown": "Unknown error",
     "reset": "Reset the app"
+  },
+  "search": {
+    "firstPublishedIn": "First published in {{year}}"
   }
 }

@@ -12,17 +12,17 @@ import { spacing } from "@/theme";
 import { useTheme } from "@/hooks/useTheme";
 import { useTranslation } from "react-i18next";
 
-export type SearchBarProps = TextInputProps & {
+export type SearchInputProps = TextInputProps & {
   style?: StyleProp<ViewStyle>;
   inputStyle?: StyleProp<TextStyle>;
 };
 
-export const SearchBar = ({
+export const SearchInput = ({
   placeholder: inputPlaceholder,
   style,
   inputStyle,
   ...props
-}: SearchBarProps) => {
+}: SearchInputProps) => {
   const { colors } = useTheme();
   const { t } = useTranslation();
   const placeholder = inputPlaceholder ?? t("search");

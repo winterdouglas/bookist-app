@@ -31,6 +31,7 @@ export const useSearchBooks = (searchTerm: string) => {
     dispatch(searchBooks(searchTerm));
   }, [dispatch, searchTerm]);
 
+  // TODO: Pull to refresh
   const refetch = useCallback(() => {}, []);
 
   // derive status booleans for ease of use

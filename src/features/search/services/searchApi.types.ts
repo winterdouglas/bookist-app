@@ -9,7 +9,7 @@ export type SearchApiResult = {
   cover_edition_key?: string;
   cover_i?: number;
   language?: string[];
-  author_name?: string;
+  author_name?: string[];
 };
 
 export type SearchApiResultPage = {

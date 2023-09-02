@@ -60,10 +60,10 @@ export const Text = ({
 };
 
 const $sizeStyles = {
-  lg: { fontSize: 24 } as TextStyle,
+  lg: { fontSize: 20 } as TextStyle,
   md: { fontSize: 18 } as TextStyle,
   sm: { fontSize: 16 } as TextStyle,
-  xs: { fontSize: 14 } as TextStyle,
+  xs: { fontSize: 12 } as TextStyle,
 };
 
 const $baseStyle: StyleProp<TextStyle> = [
@@ -73,16 +73,20 @@ const $baseStyle: StyleProp<TextStyle> = [
 
 const $presets = {
   default: $baseStyle,
-  heading: [$baseStyle, { fontWeight: 700 }] as StyleProp<TextStyle>,
-  subheading: [$baseStyle, $sizeStyles.lg] as StyleProp<TextStyle>,
-  list: [
+  heading: [
     $baseStyle,
-    $sizeStyles.xs,
-    { fontWeight: 600 },
+    $sizeStyles.lg,
+    { fontWeight: 900 },
   ] as StyleProp<TextStyle>,
-  bold: [
+  subheading: [
     $baseStyle,
     $sizeStyles.md,
+    { fontWeight: 700 },
+  ] as StyleProp<TextStyle>,
+  list: [$baseStyle, { fontWeight: 600 }] as StyleProp<TextStyle>,
+  subtitle: [
+    $baseStyle,
+    $sizeStyles.xs,
     { fontWeight: 700 },
   ] as StyleProp<TextStyle>,
 };

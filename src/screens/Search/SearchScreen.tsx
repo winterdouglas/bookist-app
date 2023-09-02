@@ -1,10 +1,10 @@
 import { View, StyleSheet } from "react-native";
-import { SearchList } from "@/features/search/components/SearchList";
+import { SearchableList } from "@/features/search/components/SearchableList";
 
 export const SearchScreen = () => {
   return (
     <View style={styles.container}>
-      <SearchList />
+      <SearchableList />
     </View>
   );
 };
