@@ -6,13 +6,13 @@ import {
   withSpring,
 } from "react-native-reanimated";
 
-export const useAnimatedSearchStyle = (searchTerm: string, length: number) => {
+export const useAnimatedSearchStyle = (searchTerm: string) => {
   const { height } = useWindowDimensions();
   const initialPosition = height / 3;
   const translateY = useSharedValue(initialPosition);
-  const hasSearchResults = !searchTerm || !length;
+  const isSearching = searchTerm.length > 3;
 
-  // This state ensures that the header has enough space to display the input on Android
+  // TODO: This state ensures that the header has enough space to display the input on Android
   // Sadly cannot go without this workaround for now.
   const [androidHeaderHeight, setAndroidHeaderHeight] = useState<
     number | undefined
@@ -26,7 +26,7 @@ export const useAnimatedSearchStyle = (searchTerm: string, length: number) => {
   }));
 
   useEffect(() => {
-    if (hasSearchResults) {
+    if (!isSearching) {
       translateY.value = initialPosition;
 
       if (Platform.OS === "android") {
@@ -40,7 +40,7 @@ export const useAnimatedSearchStyle = (searchTerm: string, length: number) => {
     if (Platform.OS === "android") {
       setAndroidHeaderHeight(undefined);
     }
-  }, [translateY, initialPosition, height, hasSearchResults]);
+  }, [translateY, initialPosition, height, isSearching]);
 
   return { animatedStyles };
 };

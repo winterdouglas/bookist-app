@@ -24,7 +24,7 @@ export const SearchableList: FC<SearchListProps> = (props) => {
   const { data, loadMore, isLoading, isUninitialized } =
     useSearchBooks(searchTerm);
   const navigation = useNavigation();
-  const { animatedStyles } = useAnimatedSearchStyle(searchTerm, data.length);
+  const { animatedStyles } = useAnimatedSearchStyle(searchTerm);
 
   const renderItem = ({ item }: ListRenderItemInfo<SearchResult>) => {
     return (
