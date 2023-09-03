@@ -5,6 +5,8 @@ import {
   ListRenderItemInfo,
   StyleSheet,
   KeyboardAvoidingView,
+  Platform,
+  KeyboardAvoidingViewProps,
 } from "react-native";
 import { DebouncedSearchInput } from "@/components/DebouncedSearchInput";
 import { useSearchBooks } from "@/features/books/hooks/useSearchBooks";
@@ -35,7 +37,9 @@ export const SearchableList: FC<SearchListProps> = (props) => {
   };
 
   return (
-    <KeyboardAvoidingView {...props}>
+    <KeyboardAvoidingView
+      {...props}
+      behavior={Platform.OS === "ios" ? "padding" : undefined}>
       <DebouncedSearchInput style={styles.input} onSearch={setSearchTerm} />
       <FlatList data={data} renderItem={renderItem} onEndReached={loadMore} />
     </KeyboardAvoidingView>
