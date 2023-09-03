@@ -34,10 +34,12 @@ export const SearchResultDetailsScreen = ({
   );
 
   return item ? (
-    <ScrollView style={[styles.container, { top: insets.top }]}>
+    <ScrollView
+      style={[styles.container, { paddingTop: insets.top + spacing.medium }]}>
       <BookCoverImage
-        preset="detail"
+        bookId={item.key}
         coverId={item.cover_i}
+        preset="detail"
         style={styles.cover}
       />
       <View style={styles.infoContainer}>

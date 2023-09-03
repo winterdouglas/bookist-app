@@ -1,16 +1,17 @@
 import { FC } from "react";
-import { ImageStyle, Platform, StyleProp } from "react-native";
+import { ImageStyle, Platform, StyleProp, StyleSheet } from "react-native";
 import Animated, {
   SharedTransition,
   withTiming,
 } from "react-native-reanimated";
 import { AutoImage, AutoImageProps } from "@/components/AutoImage";
 import { Config } from "@/config";
-import { timing } from "@/theme";
+import { spacing, timing } from "@/theme";
+import { useTheme } from "@/hooks/useTheme";
 
 export const AnimatedAutoImage = Animated.createAnimatedComponent(AutoImage);
 
-const imageTransition = SharedTransition.custom((values) => {
+const customTransition = SharedTransition.custom((values) => {
   "worklet";
   return {
     height: withTiming(values.targetHeight, { duration: timing.quick }),
@@ -21,37 +22,59 @@ const imageTransition = SharedTransition.custom((values) => {
 });
 
 export type BookCoverImageProps = Omit<AutoImageProps, "source"> & {
+  bookId: string;
   coverId?: number;
   animated?: boolean;
   preset?: keyof typeof $presets;
 };
 
 export const BookCoverImage: FC<BookCoverImageProps> = ({
+  bookId,
   coverId,
   preset = "list",
+  style,
   animated = Platform.OS === "ios",
   ...props
 }) => {
-  const id = coverId?.toString();
   const $sizeProps = $presets[preset];
-  const $styles: StyleProp<ImageStyle> = [props.style];
+  const $styles: StyleProp<ImageStyle> = [styles.cover, style];
+  const { colors } = useTheme();
 
-  return id ? (
+  const $animatedProps = animated
+    ? {
+        sharedTransitionTag: bookId,
+        sharedTransitionStyle: customTransition,
+      }
+    : {};
+
+  if (!coverId) {
+    return (
+      <Animated.View
+        {...$animatedProps}
+        style={[
+          styles.emptyContainer,
+          {
+            width: $sizeProps.maxWidth,
+            height: $sizeProps.maxHeight,
+            backgroundColor: colors.textDim,
+          },
+          $styles,
+        ]}
+      />
+    );
+  }
+
+  return (
     <AnimatedAutoImage
       source={{
-        uri: `${Config.COVERS_URL}/b/id/${id}-M.jpg`,
+        uri: `${Config.COVERS_URL}/b/id/${coverId}-M.jpg`,
       }}
-      {...(animated
-        ? {
-            sharedTransitionTag: id,
-            sharedTransitionStyle: imageTransition,
-          }
-        : {})}
+      {...$animatedProps}
       {...$sizeProps}
       {...props}
       style={$styles}
     />
-  ) : null;
+  );
 };
 
 const $presets = {
@@ -66,3 +89,14 @@ const $presets = {
     maxHeight: 160,
   },
 };
+
+const styles = StyleSheet.create({
+  emptyContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  cover: {
+    overflow: "hidden",
+    borderRadius: spacing.medium,
+  },
+});

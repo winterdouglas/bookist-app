@@ -26,18 +26,16 @@ export const BookCell: FC<{
         exiting={FadeOut}
         style={styles.container}>
         <View style={styles.wrapper}>
-          {!!item.cover_i && (
-            <View
-              style={[
-                styles.coverShadowedContainer,
-                {
-                  backgroundColor: colors.background,
-                  shadowColor: colors.shadow,
-                },
-              ]}>
-              <BookCoverImage style={styles.cover} coverId={item.cover_i} />
-            </View>
-          )}
+          <View
+            style={[
+              styles.coverShadowedContainer,
+              {
+                backgroundColor: colors.background,
+                shadowColor: colors.shadow,
+              },
+            ]}>
+            <BookCoverImage bookId={item.key} coverId={item.cover_i} />
+          </View>
         </View>
         <View style={styles.infoContainer}>
           <BookTitle title={item.title} />
@@ -68,10 +66,6 @@ const styles = StyleSheet.create({
     shadowRadius: spacing.medium,
     shadowOffset: { width: 4, height: 8 },
     shadowOpacity: 0.4,
-  },
-  cover: {
-    overflow: "hidden",
-    borderRadius: spacing.medium,
   },
   infoContainer: {
     gap: spacing.tiny,
