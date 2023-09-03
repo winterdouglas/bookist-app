@@ -11,8 +11,9 @@ import { ThemeProvider } from "@/contexts";
 import { AppNavigator } from "@/navigation";
 import { setupStore } from "@/store";
 import { LoadingIndicator } from "@/components/LoadingIndicator";
+import { PersistGate } from "redux-persist/integration/react";
 
-const store = setupStore();
+const { store, persistor } = setupStore();
 
 export const App = () => {
   return (
@@ -20,7 +21,9 @@ export const App = () => {
       <ThemeProvider>
         <Suspense fallback={<LoadingIndicator />}>
           <Provider store={store}>
-            <AppNavigator />
+            <PersistGate loading={null} persistor={persistor}>
+              <AppNavigator />
+            </PersistGate>
           </Provider>
         </Suspense>
       </ThemeProvider>

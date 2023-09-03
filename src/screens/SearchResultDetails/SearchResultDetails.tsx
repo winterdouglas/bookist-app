@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { BookCoverImage } from "@/features/search/components/BookCoverImage";
 import { useBackButton } from "@/hooks/useBackButton";
@@ -37,27 +37,30 @@ export const SearchResultDetailsScreen = ({
   }
 
   return (
-    <View style={[styles.container, { top: insets.top }]}>
+    <ScrollView style={[styles.container, { top: insets.top }]}>
       <BookCoverImage
         preset="detail"
         coverId={item.cover_i}
         style={styles.cover}
       />
-      <View>
+      <View style={styles.infoContainer}>
         <BookTitle preset="detail" title={item.title} />
         <BookAuthors authors={item.author_name} />
         <BookFirstPublishedIn year={item.first_publish_year} />
         <BookLanguages languages={item.language} />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    gap: spacing.large,
     paddingHorizontal: spacing.medium,
   },
-  cover: { alignSelf: "center" },
+  cover: {
+    alignSelf: "center",
+  },
+  infoContainer: {
+    paddingTop: spacing.huge,
+  },
 });
