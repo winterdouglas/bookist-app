@@ -1,10 +1,10 @@
 import { FC, useState } from "react";
 import {
-  View,
   ViewProps,
   FlatList,
   ListRenderItemInfo,
   StyleSheet,
+  KeyboardAvoidingView,
 } from "react-native";
 import { DebouncedSearchInput } from "@/components/DebouncedSearchInput";
 import { useSearchBooks } from "@/features/books/hooks/useSearchBooks";
@@ -35,10 +35,10 @@ export const SearchableList: FC<SearchListProps> = (props) => {
   };
 
   return (
-    <View {...props}>
+    <KeyboardAvoidingView {...props}>
       <DebouncedSearchInput style={styles.input} onSearch={setSearchTerm} />
       <FlatList data={data} renderItem={renderItem} onEndReached={loadMore} />
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

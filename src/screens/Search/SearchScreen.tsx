@@ -1,10 +1,13 @@
 import { View, StyleSheet } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { SearchableList } from "@/features/books/components/SearchableList";
 
 export const SearchScreen = () => {
+  const insets = useSafeAreaInsets();
+
   return (
-    <View style={styles.container}>
-      <SearchableList />
+    <View style={[styles.container, { paddingBottom: insets.bottom }]}>
+      <SearchableList style={styles.container} />
     </View>
   );
 };
