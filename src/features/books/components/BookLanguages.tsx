@@ -10,7 +10,7 @@ export const BookLanguages: FC<{ languages?: string[]; limit?: number }> = ({
   languages = [],
   limit = 5,
 }) => {
-  const { colors } = useTheme();
+  const { colors, dark } = useTheme();
   const { t } = useTranslation();
 
   const displayedLanguages =
@@ -38,7 +38,7 @@ export const BookLanguages: FC<{ languages?: string[]; limit?: number }> = ({
           <Text
             preset="subtitle"
             text={language}
-            style={{ color: colors.textDim }}
+            style={{ color: dark ? colors.background : colors.textDim }}
           />
         </View>
       ))}

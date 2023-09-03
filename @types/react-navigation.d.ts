@@ -38,25 +38,9 @@ declare module "@react-navigation/native" {
        */
       onPrimary: string;
       /**
-       * Secondary color
-       */
-      secondary: string;
-      /**
-       * A color that contrasts with the secondary
-       */
-      onSecondary: string;
-      /**
        * Default color for shadows
        */
       shadow: string;
-      /**
-       * A tertiary color variation
-       */
-      tertiary: string;
-      /**
-       * A color that contrast with the tertiary
-       */
-      onTertiary: string;
     };
   };
 

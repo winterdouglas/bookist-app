@@ -33,5 +33,6 @@ const styles = StyleSheet.create({
   container: {
     gap: spacing.extraSmall,
     flexDirection: "row",
+    paddingTop: spacing.extraSmall,
   },
 });

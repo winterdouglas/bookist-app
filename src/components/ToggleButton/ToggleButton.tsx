@@ -19,7 +19,7 @@ export const ToggleButton: FC<ToggleButtonProps> = ({
   onToggleChanged,
   ...props
 }) => {
-  const { colors } = useTheme();
+  const { colors, dark } = useTheme();
 
   const $containerStyle: StyleProp<ViewStyle> = [
     { justifyContent: "center", alignItems: "center" },
@@ -35,7 +35,7 @@ export const ToggleButton: FC<ToggleButtonProps> = ({
       style={$containerStyle}>
       <Icon
         name={icon}
-        color={toggled ? colors.onPrimary : colors.text}
+        color={toggled ? (dark ? colors.text : colors.onPrimary) : colors.text}
         size={$iconSizePresets[size]}
       />
     </Pressable>
