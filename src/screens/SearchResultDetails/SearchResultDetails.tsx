@@ -1,19 +1,20 @@
 import { ScrollView, StyleSheet, View } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { BookCoverImage } from "@/features/search/components/BookCoverImage";
+import { BookCoverImage } from "@/features/books/components/BookCoverImage";
 import { useBackButton } from "@/hooks/useBackButton";
 import { AppStackParamList } from "@/navigation";
-import { BookTitle } from "@/features/search/components/BookTitle";
-import { BookAuthors } from "@/features/search/components/BookAuthors";
-import { BookFirstPublishedIn } from "@/features/search/components/BookFirstPublication";
-import { BookLanguages } from "@/features/search/components/BookLanguages";
+import { BookTitle } from "@/features/books/components/BookTitle";
+import { BookAuthors } from "@/features/books/components/BookAuthors";
+import { BookFirstPublishedIn } from "@/features/books/components/BookFirstPublication";
+import { BookLanguages } from "@/features/books/components/BookLanguages";
 import {
   selectSearchResult,
   selectSearchResultPage,
-} from "@/features/search/store/searchSlice";
+} from "@/features/books/store/searchSlice";
 import { useAppSelector } from "@/hooks/useAppSelector";
 import { spacing } from "@/theme";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { BookLists } from "@/features/books/components/BookLists";
 
 export const SearchResultDetailsScreen = ({
   route,
@@ -48,6 +49,7 @@ export const SearchResultDetailsScreen = ({
         <BookAuthors authors={item.author_name} />
         <BookFirstPublishedIn year={item.first_publish_year} />
         <BookLanguages languages={item.language} />
+        <BookLists bookId={item.key} />
       </View>
     </ScrollView>
   );
@@ -62,5 +64,6 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     paddingTop: spacing.huge,
+    gap: spacing.tiny,
   },
 });

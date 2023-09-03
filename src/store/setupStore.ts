@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { searchSlice } from "@/features/search/store/searchSlice";
+import { searchSlice } from "@/features/books/store/searchSlice";
 import {
   FLUSH,
   PAUSE,
@@ -12,17 +12,21 @@ import {
   persistStore,
 } from "redux-persist";
 import { Storage } from "@/lib/storage";
+import { wishListSlice } from "@/features/books/store/wishListSlice";
+import { readingListSlice } from "@/features/books/store/readingListSlice";
+
+const reducer = combineReducers({
+  search: searchSlice.reducer,
+  wishList: wishListSlice.reducer,
+  readingList: readingListSlice.reducer,
+});
 
 const persistConfig: PersistConfig<RootState> = {
   key: "root",
   version: 1,
   storage: Storage,
-  whitelist: ["favorites"],
+  whitelist: ["wishList", "readingList"],
 };
-
-const reducer = combineReducers({
-  search: searchSlice.reducer,
-});
 
 const persistedReducer = persistReducer(persistConfig, reducer);
 

@@ -4,8 +4,8 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import type { AppAsyncThunkConfig, RequestStatus, RootState } from "@/store";
-import { SearchResult } from "@/features/search/models";
-import { SearchApi } from "@/features/search/services";
+import { SearchResult } from "@/features/books/models";
+import { SearchApi } from "@/features/books/services";
 
 type StatusBySearchTerm = Record<string, RequestStatus | undefined>;
 

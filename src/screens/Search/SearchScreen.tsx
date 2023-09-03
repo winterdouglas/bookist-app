@@ -1,5 +1,5 @@
 import { View, StyleSheet } from "react-native";
-import { SearchableList } from "@/features/search/components/SearchableList";
+import { SearchableList } from "@/features/books/components/SearchableList";
 
 export const SearchScreen = () => {
   return (

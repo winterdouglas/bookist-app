@@ -1,14 +1,15 @@
 import { FC } from "react";
 import { StyleSheet, TouchableHighlight, View } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
-import { BookCoverImage } from "@/features/search/components/BookCoverImage";
+import { BookCoverImage } from "@/features/books/components/BookCoverImage";
 import { useTheme } from "@/hooks/useTheme";
 import { spacing } from "@/theme";
-import { SearchResult } from "@/features/search/models";
-import { BookLanguages } from "@/features/search/components/BookLanguages";
-import { BookFirstPublishedIn } from "@/features/search/components/BookFirstPublication";
-import { BookAuthors } from "@/features/search/components/BookAuthors";
-import { BookTitle } from "@/features/search/components/BookTitle";
+import { SearchResult } from "@/features/books/models";
+import { BookLanguages } from "@/features/books/components/BookLanguages";
+import { BookFirstPublishedIn } from "@/features/books/components/BookFirstPublication";
+import { BookAuthors } from "@/features/books/components/BookAuthors";
+import { BookTitle } from "@/features/books/components/BookTitle";
+import { BookLists } from "@/features/books/components/BookLists";
 
 export const BookCell: FC<{
   item: SearchResult;
@@ -43,6 +44,7 @@ export const BookCell: FC<{
           <BookAuthors authors={item.author_name} />
           <BookFirstPublishedIn year={item.first_publish_year} />
           <BookLanguages languages={item.language} />
+          <BookLists bookId={item.key} />
         </View>
       </Animated.View>
     </TouchableHighlight>

@@ -6,7 +6,7 @@ import {
   searchBooks,
   selectAllPagesBySearchTerm,
   selectStatusBySearchTerm,
-} from "@/features/search/store/searchSlice";
+} from "@/features/books/store/searchSlice";
 
 export const useSearchBooks = (searchTerm: string) => {
   const dispatch = useAppDispatch();
