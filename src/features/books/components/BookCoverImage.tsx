@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { ImageStyle, StyleProp } from "react-native";
+import { ImageStyle, Platform, StyleProp } from "react-native";
 import Animated, {
   SharedTransition,
   withTiming,
@@ -42,7 +42,7 @@ export const BookCoverImage: FC<BookCoverImageProps> = ({
         source={{
           uri: `${Config.COVERS_URL}/b/id/${id}-M.jpg`,
         }}
-        {...(animated
+        {...(animated && Platform.OS === "ios"
           ? {
               sharedTransitionTag: id,
               sharedTransitionStyle: imageTransition,

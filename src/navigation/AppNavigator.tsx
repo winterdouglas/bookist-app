@@ -7,6 +7,7 @@ import {
 import { useTheme } from "@/hooks/useTheme";
 import { SearchScreen } from "@/screens/Search";
 import { SearchResultDetailsScreen } from "@/screens/SearchResultDetails/SearchResultDetails";
+import { Platform } from "react-native";
 
 /**
  * This type allows TypeScript to know what routes are defined in the navigator.
@@ -41,6 +42,7 @@ const AppStack = () => {
           headerTransparent: true,
           headerTitle: "",
           headerBackTitleVisible: false,
+          animation: Platform.OS === "android" ? "fade_from_bottom" : undefined,
         }}
       />
     </Stack.Navigator>
