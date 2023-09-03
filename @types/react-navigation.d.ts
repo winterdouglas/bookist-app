@@ -1,5 +1,5 @@
 import "@react-navigation/native";
-import { AppStackParamList } from "../src/navigation/AppNavigator";
+import { AppStackParamList } from "@/navigation/AppNavigator";
 
 declare module "@react-navigation/native" {
   export type ExtendedTheme = {
