@@ -33,11 +33,7 @@ export const SearchResultDetailsScreen = ({
     selectSearchResult(state, searchTerm, itemPage ?? 0, id),
   );
 
-  if (!item) {
-    return null;
-  }
-
-  return (
+  return item ? (
     <ScrollView style={[styles.container, { top: insets.top }]}>
       <BookCoverImage
         preset="detail"
@@ -52,7 +48,7 @@ export const SearchResultDetailsScreen = ({
         <BookLists bookId={item.key} />
       </View>
     </ScrollView>
-  );
+  ) : null;
 };
 
 const styles = StyleSheet.create({
