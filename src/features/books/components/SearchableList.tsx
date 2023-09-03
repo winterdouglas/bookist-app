@@ -6,7 +6,6 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   Platform,
-  KeyboardAvoidingViewProps,
 } from "react-native";
 import { DebouncedSearchInput } from "@/components/DebouncedSearchInput";
 import { useSearchBooks } from "@/features/books/hooks/useSearchBooks";

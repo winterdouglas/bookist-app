@@ -24,38 +24,36 @@ export const BookLanguages: FC<{ languages?: string[]; limit?: number }> = ({
         })
       : "";
 
-  return (
-    !!displayedLanguages.length && (
-      <View style={styles.container}>
-        {displayedLanguages.map((language) => (
-          <View
-            key={language}
-            style={[
-              styles.languageContainer,
-              {
-                backgroundColor: getColorFromSeed(language),
-              },
-            ]}>
-            <Text
-              preset="subtitle"
-              text={language}
-              style={{ color: colors.textDim }}
-            />
-          </View>
-        ))}
-        {!!remainingLanguages && (
+  return displayedLanguages.length ? (
+    <View style={styles.container}>
+      {displayedLanguages.map((language) => (
+        <View
+          key={language}
+          style={[
+            styles.languageContainer,
+            {
+              backgroundColor: getColorFromSeed(language),
+            },
+          ]}>
           <Text
-            style={{
-              marginLeft: spacing.tiny,
-              color: colors.textDim,
-            }}
             preset="subtitle"
-            text={remainingLanguages}
+            text={language}
+            style={{ color: colors.textDim }}
           />
-        )}
-      </View>
-    )
-  );
+        </View>
+      ))}
+      {!!remainingLanguages && (
+        <Text
+          style={{
+            marginLeft: spacing.tiny,
+            color: colors.textDim,
+          }}
+          preset="subtitle"
+          text={remainingLanguages}
+        />
+      )}
+    </View>
+  ) : null;
 };
 
 const styles = StyleSheet.create({

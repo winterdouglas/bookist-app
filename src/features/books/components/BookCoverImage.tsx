@@ -36,24 +36,22 @@ export const BookCoverImage: FC<BookCoverImageProps> = ({
   const $sizeProps = $presets[preset];
   const $styles: StyleProp<ImageStyle> = [props.style];
 
-  return (
-    !!id && (
-      <AnimatedAutoImage
-        source={{
-          uri: `${Config.COVERS_URL}/b/id/${id}-M.jpg`,
-        }}
-        {...(animated && Platform.OS === "ios"
-          ? {
-              sharedTransitionTag: id,
-              sharedTransitionStyle: imageTransition,
-            }
-          : {})}
-        {...$sizeProps}
-        {...props}
-        style={$styles}
-      />
-    )
-  );
+  return id ? (
+    <AnimatedAutoImage
+      source={{
+        uri: `${Config.COVERS_URL}/b/id/${id}-M.jpg`,
+      }}
+      {...(animated && Platform.OS === "ios"
+        ? {
+            sharedTransitionTag: id,
+            sharedTransitionStyle: imageTransition,
+          }
+        : {})}
+      {...$sizeProps}
+      {...props}
+      style={$styles}
+    />
+  ) : null;
 };
 
 const $presets = {

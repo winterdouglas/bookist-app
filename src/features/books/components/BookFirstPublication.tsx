@@ -7,13 +7,11 @@ export const BookFirstPublishedIn: FC<{ year?: number }> = ({ year = 0 }) => {
   const { t } = useTranslation(["search"]);
   const { colors } = useTheme();
 
-  return (
-    !!year && (
-      <Text
-        preset="subtitle"
-        text={t("search:firstPublishedIn", { year: year })}
-        style={{ color: colors.textDim }}
-      />
-    )
-  );
+  return year ? (
+    <Text
+      preset="subtitle"
+      text={t("search:firstPublishedIn", { year: year })}
+      style={{ color: colors.textDim }}
+    />
+  ) : null;
 };
