@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    [
+      {
+        "alignSelf": "center",
+        "flexDirection": "row",
+        "gap": 8,
+      },
+      undefined,
+    ]
+  }
+>
+  <ActivityIndicator
+    size="small"
+  />
+  <Text
+    selectable={true}
+    style={
+      [
+        [
+          {
+            "fontSize": 16,
+          },
+          {
+            "fontWeight": "500",
+          },
+        ],
+        undefined,
+        {
+          "color": "rgb(28, 28, 30)",
+        },
+        undefined,
+      ]
+    }
+  >
+    loading
+  </Text>
+</View>
+`;
