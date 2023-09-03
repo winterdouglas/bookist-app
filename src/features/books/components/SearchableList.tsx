@@ -7,13 +7,15 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
+import Animated from "react-native-reanimated";
+import { useNavigation } from "@react-navigation/native";
 import { DebouncedSearchInput } from "@/components/DebouncedSearchInput";
 import { useSearchBooks } from "@/features/books/hooks/useSearchBooks";
 import { spacing } from "@/theme";
 import { BookCell } from "@/features/books/components/BookCell";
-import { useNavigation } from "@react-navigation/native";
 import { SearchResult } from "@/features/books/models";
 import { LoadingIndicator } from "@/components/LoadingIndicator";
+import { useAnimatedSearchStyle } from "@/features/books/hooks/useAnimatedSearchStyle";
 
 export type SearchListProps = ViewProps;
 
@@ -22,6 +24,7 @@ export const SearchableList: FC<SearchListProps> = (props) => {
   const { data, loadMore, isLoading, isUninitialized } =
     useSearchBooks(searchTerm);
   const navigation = useNavigation();
+  const { animatedStyles } = useAnimatedSearchStyle(searchTerm, data.length);
 
   const renderItem = ({ item }: ListRenderItemInfo<SearchResult>) => {
     return (
@@ -41,11 +44,19 @@ export const SearchableList: FC<SearchListProps> = (props) => {
     <KeyboardAvoidingView
       {...props}
       behavior={Platform.OS === "ios" ? "padding" : undefined}>
-      <DebouncedSearchInput style={styles.input} onSearch={setSearchTerm} />
       <FlatList
         data={data}
         renderItem={renderItem}
         onEndReached={loadMore}
+        stickyHeaderIndices={[0]}
+        ListHeaderComponent={
+          <Animated.View style={animatedStyles}>
+            <DebouncedSearchInput
+              style={styles.input}
+              onSearch={setSearchTerm}
+            />
+          </Animated.View>
+        }
         ListFooterComponent={
           isLoading && !isUninitialized ? (
             <LoadingIndicator preset="inline" />
