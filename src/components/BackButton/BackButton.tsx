@@ -13,7 +13,7 @@ export const BackButton = () => {
       onPress={navigation.goBack}
       style={[styles.container, { backgroundColor: colors.text }]}>
       <Icon
-        size={24}
+        size={spacing.extraLarge}
         name="chevron-back"
         style={[styles.icon, { color: colors.background }]}
       />

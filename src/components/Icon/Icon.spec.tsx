@@ -1,12 +1,12 @@
 import renderer from "react-test-renderer";
-import { LoadingIndicator } from "./LoadingIndicator";
 import { ThemeProvider } from "@/contexts";
+import { Icon } from "./Icon";
 
 it("renders correctly", () => {
   const tree = renderer
     .create(
       <ThemeProvider>
-        <LoadingIndicator />
+        <Icon name="alarm" />
       </ThemeProvider>,
     )
     .toJSON();

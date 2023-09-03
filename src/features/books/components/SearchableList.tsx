@@ -13,12 +13,14 @@ import { spacing } from "@/theme";
 import { BookCell } from "@/features/books/components/BookCell";
 import { useNavigation } from "@react-navigation/native";
 import { SearchResult } from "@/features/books/models";
+import { LoadingIndicator } from "@/components/LoadingIndicator";
 
 export type SearchListProps = ViewProps;
 
 export const SearchableList: FC<SearchListProps> = (props) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const { data, loadMore } = useSearchBooks(searchTerm);
+  const { data, loadMore, isLoading, isUninitialized } =
+    useSearchBooks(searchTerm);
   const navigation = useNavigation();
 
   const renderItem = ({ item }: ListRenderItemInfo<SearchResult>) => {
@@ -40,7 +42,16 @@ export const SearchableList: FC<SearchListProps> = (props) => {
       {...props}
       behavior={Platform.OS === "ios" ? "padding" : undefined}>
       <DebouncedSearchInput style={styles.input} onSearch={setSearchTerm} />
-      <FlatList data={data} renderItem={renderItem} onEndReached={loadMore} />
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        onEndReached={loadMore}
+        ListFooterComponent={
+          isLoading && !isUninitialized ? (
+            <LoadingIndicator preset="inline" />
+          ) : null
+        }
+      />
     </KeyboardAvoidingView>
   );
 };

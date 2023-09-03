@@ -29,7 +29,7 @@ export type BookCoverImageProps = Omit<AutoImageProps, "source"> & {
 export const BookCoverImage: FC<BookCoverImageProps> = ({
   coverId,
   preset = "list",
-  animated = true,
+  animated = Platform.OS === "ios",
   ...props
 }) => {
   const id = coverId?.toString();
@@ -41,7 +41,7 @@ export const BookCoverImage: FC<BookCoverImageProps> = ({
       source={{
         uri: `${Config.COVERS_URL}/b/id/${id}-M.jpg`,
       }}
-      {...(animated && Platform.OS === "ios"
+      {...(animated
         ? {
             sharedTransitionTag: id,
             sharedTransitionStyle: imageTransition,

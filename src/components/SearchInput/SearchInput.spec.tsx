@@ -1,14 +1,15 @@
 import renderer from "react-test-renderer";
-import { LoadingIndicator } from "./LoadingIndicator";
+import { SearchInput } from "./SearchInput";
 import { ThemeProvider } from "@/contexts";
 
 it("renders correctly", () => {
   const tree = renderer
     .create(
       <ThemeProvider>
-        <LoadingIndicator />
+        <SearchInput />
       </ThemeProvider>,
     )
     .toJSON();
+
   expect(tree).toMatchSnapshot();
 });

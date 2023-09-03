@@ -1,21 +1,49 @@
-import { StyleProp, Text, View, ViewStyle } from "react-native";
+import {
+  ActivityIndicator,
+  StyleProp,
+  View,
+  ViewProps,
+  ViewStyle,
+} from "react-native";
 import { useTranslation } from "react-i18next";
+import { Text } from "@/components/Text";
+import { FC } from "react";
+import { spacing } from "@/theme";
 
-// TODO: Use the proper Text component
-// import { Text } from "@/components/Text";
+export type LoadingIndicatorProps = ViewProps & {
+  preset?: keyof typeof $containerPresets;
+};
 
-export const LoadingIndicator = () => {
+export const LoadingIndicator: FC<LoadingIndicatorProps> = ({
+  preset = "inline",
+  style,
+  ...props
+}) => {
   const { t } = useTranslation();
 
   return (
-    <View style={$containerStyle}>
-      <Text>{t("loading")}</Text>
+    <View {...props} style={[$containerPresets[preset], style]}>
+      <ActivityIndicator size="small" />
+      <Text text={t("loading")} />
     </View>
   );
 };
 
-const $containerStyle: StyleProp<ViewStyle> = {
-  flex: 1,
-  justifyContent: "center",
-  alignItems: "center",
+const $baseStyle: StyleProp<ViewStyle> = {
+  flexDirection: "row",
+  gap: spacing.extraSmall,
+};
+
+const $containerPresets = {
+  inline: {
+    ...$baseStyle,
+    alignSelf: "center",
+  } as StyleProp<ViewStyle>,
+
+  full: {
+    ...$baseStyle,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  } as StyleProp<ViewStyle>,
 };

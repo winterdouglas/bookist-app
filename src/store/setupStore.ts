@@ -47,8 +47,8 @@ export const setupStore = () => {
 };
 
 export type RootState = ReturnType<typeof reducer>;
-export type AppStore = ReturnType<typeof setupStore>;
-export type AppDispatch = AppStore["store"]["dispatch"];
+export type AppStore = ReturnType<typeof setupStore>["store"];
+export type AppDispatch = AppStore["dispatch"];
 
 export type AppAsyncThunkConfig<TExtra = unknown, TRejectedValue = unknown> = {
   state: RootState;

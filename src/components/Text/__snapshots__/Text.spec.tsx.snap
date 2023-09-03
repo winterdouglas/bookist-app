@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<Text
+  selectable={true}
+  style={
+    [
+      [
+        {
+          "fontSize": 16,
+        },
+        {
+          "fontWeight": "500",
+        },
+      ],
+      undefined,
+      {
+        "color": "rgb(28, 28, 30)",
+      },
+      undefined,
+    ]
+  }
+>
+  just some fake text!
+</Text>
+`;

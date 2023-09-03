@@ -3,14 +3,39 @@
 exports[`renders correctly 1`] = `
 <View
   style={
-    {
-      "alignItems": "center",
-      "flex": 1,
-      "justifyContent": "center",
-    }
+    [
+      {
+        "alignSelf": "center",
+        "flexDirection": "row",
+        "gap": 8,
+      },
+      undefined,
+    ]
   }
 >
-  <Text>
+  <ActivityIndicator
+    size="small"
+  />
+  <Text
+    selectable={true}
+    style={
+      [
+        [
+          {
+            "fontSize": 16,
+          },
+          {
+            "fontWeight": "500",
+          },
+        ],
+        undefined,
+        {
+          "color": "rgb(28, 28, 30)",
+        },
+        undefined,
+      ]
+    }
+  >
     loading
   </Text>
 </View>
