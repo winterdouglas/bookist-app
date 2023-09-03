@@ -44,19 +44,13 @@ export const SearchableList: FC<SearchListProps> = (props) => {
     <KeyboardAvoidingView
       {...props}
       behavior={Platform.OS === "ios" ? "padding" : undefined}>
+      <Animated.View style={[animatedStyles, styles.header]}>
+        <DebouncedSearchInput style={styles.input} onSearch={setSearchTerm} />
+      </Animated.View>
       <FlatList
         data={data}
         renderItem={renderItem}
         onEndReached={loadMore}
-        stickyHeaderIndices={[0]}
-        ListHeaderComponent={
-          <Animated.View style={animatedStyles}>
-            <DebouncedSearchInput
-              style={styles.input}
-              onSearch={setSearchTerm}
-            />
-          </Animated.View>
-        }
         ListFooterComponent={
           isLoading && !isUninitialized ? (
             <LoadingIndicator preset="inline" />
@@ -68,6 +62,9 @@ export const SearchableList: FC<SearchListProps> = (props) => {
 };
 
 const styles = StyleSheet.create({
+  header: {
+    zIndex: 100,
+  },
   input: {
     margin: spacing.medium,
   },
