@@ -14,18 +14,20 @@ import {
 import { Storage } from "@/lib/storage";
 import { wishListSlice } from "@/features/books/store/wishListSlice";
 import { readingListSlice } from "@/features/books/store/readingListSlice";
+import { themeSlice } from "@/features/theme/themeSlice";
 
 const reducer = combineReducers({
   search: searchSlice.reducer,
   wishList: wishListSlice.reducer,
   readingList: readingListSlice.reducer,
+  theme: themeSlice.reducer,
 });
 
 const persistConfig: PersistConfig<RootState> = {
   key: "root",
   version: 1,
   storage: Storage,
-  whitelist: ["wishList", "readingList"],
+  whitelist: ["wishList", "readingList", "theme"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);

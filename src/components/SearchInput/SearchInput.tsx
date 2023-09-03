@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Icon } from "@/components/Icon";
 import { spacing } from "@/theme";
-import { useTheme } from "@/hooks/useTheme";
+import { useAppTheme } from "@/hooks/useAppTheme";
 import { useTranslation } from "react-i18next";
 
 export type SearchInputProps = TextInputProps & {
@@ -23,7 +23,7 @@ export const SearchInput = ({
   inputStyle,
   ...props
 }: SearchInputProps) => {
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
   const { t } = useTranslation();
   const placeholder = inputPlaceholder ?? t("search");
 

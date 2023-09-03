@@ -1,13 +1,15 @@
 import renderer from "react-test-renderer";
+import { Provider } from "react-redux";
+import { setupStore } from "@/store";
 import { SearchInput } from "./SearchInput";
-import { ThemeProvider } from "@/contexts";
 
 it("renders correctly", () => {
+  const { store } = setupStore();
   const tree = renderer
     .create(
-      <ThemeProvider>
+      <Provider store={store}>
         <SearchInput />
-      </ThemeProvider>,
+      </Provider>,
     )
     .toJSON();
 

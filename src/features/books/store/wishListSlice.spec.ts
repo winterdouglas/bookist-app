@@ -41,6 +41,7 @@ describe("wishListSlice", () => {
     const createFakeState = (wishing: Record<string, boolean>): RootState => ({
       readingList: {} as never,
       search: {} as never,
+      theme: {} as never,
       wishList: {
         wishedBooksByBookId: wishing,
       },

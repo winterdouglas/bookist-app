@@ -8,7 +8,6 @@ import {
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
-import { ThemeProvider } from "@/contexts";
 import { AppNavigator } from "@/navigation";
 import { setupStore } from "@/store";
 import { LoadingIndicator } from "@/components/LoadingIndicator";
@@ -18,15 +17,13 @@ const { store, persistor } = setupStore();
 export const App = () => {
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      <ThemeProvider>
+      <Provider store={store}>
         <Suspense fallback={<LoadingIndicator preset="full" />}>
-          <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-              <AppNavigator />
-            </PersistGate>
-          </Provider>
+          <PersistGate loading={null} persistor={persistor}>
+            <AppNavigator />
+          </PersistGate>
         </Suspense>
-      </ThemeProvider>
+      </Provider>
     </SafeAreaProvider>
   );
 };

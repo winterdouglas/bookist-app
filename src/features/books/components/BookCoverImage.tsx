@@ -7,7 +7,7 @@ import Animated, {
 import { AutoImage, AutoImageProps } from "@/components/AutoImage";
 import { Config } from "@/config";
 import { spacing, timing } from "@/theme";
-import { useTheme } from "@/hooks/useTheme";
+import { useAppTheme } from "@/hooks/useAppTheme";
 
 export const AnimatedAutoImage = Animated.createAnimatedComponent(AutoImage);
 
@@ -38,7 +38,7 @@ export const BookCoverImage: FC<BookCoverImageProps> = ({
 }) => {
   const $sizeProps = $presets[preset];
   const $styles: StyleProp<ImageStyle> = [styles.cover, style];
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
 
   const $animatedProps = animated
     ? {

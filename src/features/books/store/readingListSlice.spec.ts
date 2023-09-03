@@ -39,6 +39,7 @@ describe("readingListSlice", () => {
       readingList: {
         readingBooksByBookId: reading,
       },
+      theme: {} as never,
       search: {} as never,
       wishList: {} as never,
     });

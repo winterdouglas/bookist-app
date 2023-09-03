@@ -2,7 +2,7 @@ import { FC } from "react";
 import { StyleSheet, TouchableHighlight, View } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { BookCoverImage } from "@/features/books/components/BookCoverImage";
-import { useTheme } from "@/hooks/useTheme";
+import { useAppTheme } from "@/hooks/useAppTheme";
 import { spacing } from "@/theme";
 import { SearchResult } from "@/features/books/models";
 import { BookLanguages } from "@/features/books/components/BookLanguages";
@@ -15,7 +15,7 @@ export const BookCell: FC<{
   item: SearchResult;
   onPress?: (id: string) => void;
 }> = ({ item, onPress }) => {
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
 
   return (
     <TouchableHighlight

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { StyleSheet, View } from "react-native";
 import { useTranslation } from "react-i18next";
-import { useTheme } from "@/hooks/useTheme";
+import { useAppTheme } from "@/hooks/useAppTheme";
 import { spacing } from "@/theme";
 import { getColorFromSeed } from "@/utils/getColorFromSeed";
 import { Text } from "@/components/Text";
@@ -10,7 +10,7 @@ export const BookLanguages: FC<{ languages?: string[]; limit?: number }> = ({
   languages = [],
   limit = 5,
 }) => {
-  const { colors, dark } = useTheme();
+  const { colors, dark } = useAppTheme();
   const { t } = useTranslation();
 
   const displayedLanguages =

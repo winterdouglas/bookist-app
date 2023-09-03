@@ -4,7 +4,7 @@ import {
   createNativeStackNavigator,
   type NativeStackScreenProps,
 } from "@react-navigation/native-stack";
-import { useTheme } from "@/hooks/useTheme";
+import { useAppTheme } from "@/hooks/useAppTheme";
 import { SearchScreen } from "@/screens/Search";
 import { SearchResultDetailsScreen } from "@/screens/SearchResultDetails/SearchResultDetails";
 import { Platform } from "react-native";
@@ -52,7 +52,7 @@ const AppStack = () => {
 type AppNavigatorProps = Partial<ComponentProps<typeof NavigationContainer>>;
 
 export const AppNavigator = (props: AppNavigatorProps) => {
-  const theme = useTheme();
+  const theme = useAppTheme();
 
   return (
     <NavigationContainer theme={theme} {...props}>

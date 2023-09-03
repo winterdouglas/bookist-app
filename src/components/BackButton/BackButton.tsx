@@ -1,12 +1,12 @@
 import { Icon } from "@/components/Icon";
-import { useTheme } from "@/hooks/useTheme";
+import { useAppTheme } from "@/hooks/useAppTheme";
 import { spacing } from "@/theme";
 import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, TouchableOpacity } from "react-native";
 
 export const BackButton = () => {
   const navigation = useNavigation();
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
 
   return (
     <TouchableOpacity

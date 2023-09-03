@@ -5,7 +5,7 @@ import {
   type TextProps as RNTextProps,
   type TextStyle,
 } from "react-native";
-import { useTheme } from "@/hooks/useTheme";
+import { useAppTheme } from "@/hooks/useAppTheme";
 
 type Sizes = keyof typeof $sizeStyles;
 type Presets = keyof typeof $presets;
@@ -25,7 +25,7 @@ export const Text = ({
   style: $styleOverride,
   ...rest
 }: TextProps) => {
-  const { colors } = useTheme();
+  const { colors } = useAppTheme();
   const content = text || children;
 
   const $styles = [

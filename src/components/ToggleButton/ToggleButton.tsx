@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Pressable, StyleProp, ViewStyle } from "react-native";
 import { Icon, IconProps } from "@/components/Icon";
 import { spacing } from "@/theme";
-import { useTheme } from "@/hooks/useTheme";
+import { useAppTheme } from "@/hooks/useAppTheme";
 
 export type ToggleButtonProps = Omit<IconProps, "name" | "color" | "size"> & {
   icon: IconProps["name"];
@@ -19,7 +19,7 @@ export const ToggleButton: FC<ToggleButtonProps> = ({
   onToggleChanged,
   ...props
 }) => {
-  const { colors, dark } = useTheme();
+  const { colors, dark } = useAppTheme();
 
   const $containerStyle: StyleProp<ViewStyle> = [
     { justifyContent: "center", alignItems: "center" },
