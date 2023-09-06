@@ -55,6 +55,10 @@ The best way to keep the code clean and reliable is by auto formatting and linti
 
 - **@react-navigation/native**: For navigation. The best navigation library for React Native.
 - **react-native-reanimated**: For native and performant animations, deep integration with react navigation. I used the shared element animations to animate the details.
+- **react-native-mmkv**: Simply the fastest persistent storage out there.
+- **react-native-config**: For environment configurations. It's powerful and flexible, and supports injecting configs even in native code if needed.
+- **react-native-vector-icons**: Popular react native icons library, offers a wide variety of icon libs to be used. In this project, Ionicons was chosen.
+- **redux-persist**: For state persistence across usages.
 - **react-i18next**: For translations, so that no texts are used across the app without being in the translations file, that allows for multi-language support. For now only English is supported. It's fully typed for consistency.
 - **axios**: For data fetching. Many advantages over `fetch`, including auto json deserialization, interceptors and more.
 
