@@ -53,7 +53,7 @@ The best way to keep the code clean and reliable is by auto formatting and linti
 
 ### Additional libs (and why's)
 
-- **@react-navigation/native**: For navigation. The best navigation library for React Native.
+- **react-navigation**: For navigation. The best navigation library for React Native.
 - **react-native-reanimated**: For native and performant animations, deep integration with react navigation. I used the shared element animations to animate the details.
 - **react-native-mmkv**: Simply the fastest persistent storage out there.
 - **react-native-config**: For environment configurations. It's powerful and flexible, and supports injecting configs even in native code if needed.
@@ -69,38 +69,44 @@ I'll further explain how, keep reading :)
 
 ### Structure
 
+- **assets**: Animations, images, etc.
 - **components**: Fully reusable components that can be used across the app.
-- **config**: Holds app configurations. Allows switching between prod and dev. This can be extended with `react-native-config` for a more robust setup. I decided to skip it to keep it simple.
-- **contexts**: Global contexts. At the moment is where the `ThemeContext` and its provider lives.
+- **config**: Holds app configurations. Allows switching between prod and dev.
+- **contexts**: Global contexts.
 - **features**: This is the main place where features are implemented. It's a robust structure that allows many features to be added and worked separately in the app.
 - **hooks**: General purpose hooks that are not related to a specific feature of the app.
-- **lib**: This serves as a sort of facade, abstracting away 3rd party dependencies and making them 1st party.
+- **lib**: Things here are a facade, abstracting away 3rd party dependencies and making them 1st party.
 - **navigators**: React Navigation navigator configurations, including navigation types and the stack configuration.
-- **screens**: This is where the screen components live. I opted to keep them separated from the features as they serve as sort of containers at the moment.
+- **screens**: This is where the screen components live. I opted to keep them separated from the features as they serve as sort of containers at the moment, while the actual feature details are implemented in the feature specific folders.
 - **services**: Any services that interface with the outside will live there (REST APIs, Push Notifications, etc.).
+- **store**: This is where the store setup happens. Things that are store global, not belonging to a feature can live here.
 - **theme**: Theme aspects of the app, like colors, spacings, typography.
 - **utils**: General app utility functions.
+- **App**: The starting point of the app.
 
 ### Absolute paths
 
-The app is configured to allow absolute paths (using babel-plugin-module-resolver), instead of long "../../../" imports. Both babel and typescript are configured properly to support that. The absolute import prefix is **@/**.
+The app is configured to allow absolute paths (using `babel-plugin-module-resolver`), instead of long "../../../" imports. Both babel and typescript are configured properly to support that. The absolute import prefix is **@/**.
 
 ### Barrels
 
-In order to facilitate imports, barrels are being added to relevant places. A barrel is an `index.ts` file that re-exports what's "public" of that context, therefore it makes it easier for consumers to use those. I find it valuable to have it like that because then in one component folder I can have its tests aside to it, some other relevant stuff while only exporting what should be "public".
+In order to facilitate imports, barrels are being added to relevant places. A barrel is an `index.ts` file that re-exports what's "public" of that mini-module, therefore it makes it easier for consumers to use those. I find it valuable to have it like that because then in one component folder I can have its tests aside to it, some other relevant stuff while only exporting what should be visible, keeping it clean and consistent.
 
 ### Features
 
 Let's think of a feature as a smaller version of the outer app structure, that means a feature can have:
 
+- assets
 - components
 - contexts
 - hooks
 - services
+- store
 - utils
-  etc...
 
-All of the above are purely related to that feature.
+All of the above is then purely related to that feature only.
+
+## Key elements
 
 ### Components
 
@@ -125,13 +131,13 @@ Currently the app is implemented with a robust paginated in memory cache, whenev
 
 ### i18n
 
-Support for multi-language is always important in any application, even if the app uses one language. It's important to have the texts centralized and not spread around as this improves maintenance, and once we decide to support another language it will be ready for that.
+Support for multi-language is always important in any application, even if the app uses one language.
 
 Since the project uses `react-i18next`, that requires the use of a `Suspense` component, that is to display a fallback while translations are being loaded.
 
 ### Themes
 
-As briefly explained earlier, the app uses a wrapper around ReactNavigation's theme. Why? Because we often won't want only what the ReactNavigation theme offers, but a more robust mechanism, while at the same time having to configure the navigation theme. With this approach we are extending the mechanism, allowing react navigation to use its own theme while supporting extending our custom theme with more characteristics that react navigation doesn't care about.
+The app uses a wrapper around ReactNavigation's theme. Why? Because we often won't want only what the ReactNavigation theme offers, but a more robust mechanism, while at the same time having to configure the navigation theme. With this approach we are extending the mechanism, allowing react navigation to use its own theme while extending our custom theme with more characteristics that react navigation doesn't care about.
 
 The app follows the system theme by default until the user taps to toggle the theme, that's then stored as a preference and it will be persisted across usages.
 
