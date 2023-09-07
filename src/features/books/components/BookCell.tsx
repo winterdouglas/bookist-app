@@ -2,7 +2,7 @@ import { FC } from "react";
 import { StyleSheet, TouchableHighlight, View } from "react-native";
 import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 import { BookCoverImage } from "@/features/books/components/BookCoverImage";
-import { useAppTheme } from "@/hooks/useAppTheme";
+import { useAppTheme } from "@/features/theme/hooks/useAppTheme";
 import { spacing } from "@/theme";
 import { SearchResult } from "@/features/books/models";
 import { BookLanguages } from "@/features/books/components/BookLanguages";

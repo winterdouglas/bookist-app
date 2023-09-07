@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { Icon } from "@/components/Icon";
 import { spacing } from "@/theme";
-import { useAppTheme } from "@/hooks/useAppTheme";
+import { useAppTheme } from "@/features/theme/hooks/useAppTheme";
 import { useTranslation } from "react-i18next";
 
 export type SearchInputProps = TextInputProps & {

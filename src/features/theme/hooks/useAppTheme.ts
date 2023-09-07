@@ -1,7 +1,10 @@
 import { useColorScheme } from "react-native";
 import { useAppDispatch } from "@/hooks/useAppDispatch";
 import { useAppSelector } from "@/hooks/useAppSelector";
-import { selectTheme, setSelectedTheme } from "@/features/theme/themeSlice";
+import {
+  selectTheme,
+  setSelectedTheme,
+} from "@/features/theme/store/themeSlice";
 import { AppTheme, theme } from "@/theme";
 import { useCallback } from "react";
 

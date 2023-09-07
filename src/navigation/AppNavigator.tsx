@@ -1,13 +1,13 @@
 import { ComponentProps } from "react";
+import { Platform } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import {
   createNativeStackNavigator,
   type NativeStackScreenProps,
 } from "@react-navigation/native-stack";
-import { useAppTheme } from "@/hooks/useAppTheme";
+import { useAppTheme } from "@/features/theme/hooks/useAppTheme";
 import { SearchScreen } from "@/screens/Search";
 import { SearchResultDetailsScreen } from "@/screens/SearchResultDetails/SearchResultDetails";
-import { Platform } from "react-native";
 
 /**
  * This type allows TypeScript to know what routes are defined in the navigator.

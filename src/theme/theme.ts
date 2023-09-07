@@ -4,6 +4,19 @@ import {
   ExtendedTheme,
 } from "@react-navigation/native";
 
+export const pastelColors: string[] = [
+  "#FFD1DC",
+  "#FFC3A0",
+  "#FFDFC1",
+  "#B5EAD7",
+  "#A7C5EB",
+  "#C8A2C8",
+  "#FFABAB",
+  "#FFE4A4",
+  "#A2DED0",
+  "#E6D4E6",
+];
+
 export const theme = {
   light: {
     ...DefaultTheme,

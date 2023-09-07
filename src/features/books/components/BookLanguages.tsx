@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { StyleSheet, View } from "react-native";
 import { useTranslation } from "react-i18next";
-import { useAppTheme } from "@/hooks/useAppTheme";
+import { useAppTheme } from "@/features/theme/hooks/useAppTheme";
 import { spacing } from "@/theme";
 import { getColorFromSeed } from "@/utils/getColorFromSeed";
 import { Text } from "@/components/Text";

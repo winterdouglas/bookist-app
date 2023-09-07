@@ -7,14 +7,10 @@ import { BookTitle } from "@/features/books/components/BookTitle";
 import { BookAuthors } from "@/features/books/components/BookAuthors";
 import { BookFirstPublishedIn } from "@/features/books/components/BookFirstPublication";
 import { BookLanguages } from "@/features/books/components/BookLanguages";
-import {
-  selectSearchResult,
-  selectSearchResultPage,
-} from "@/features/books/store/searchSlice";
-import { useAppSelector } from "@/hooks/useAppSelector";
 import { spacing } from "@/theme";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { BookLists } from "@/features/books/components/BookLists";
+import { useLookupSearchResult } from "@/features/books/hooks/useLookupSearchResult";
 
 export const SearchResultDetailsScreen = ({
   route,
@@ -25,29 +21,23 @@ export const SearchResultDetailsScreen = ({
   // Ideally this should be in a Screen component, for now it will do
   useBackButton();
 
-  const itemPage = useAppSelector((state) =>
-    selectSearchResultPage(state, searchTerm, id),
-  );
+  const searchResult = useLookupSearchResult(searchTerm, id);
 
-  const item = useAppSelector((state) =>
-    selectSearchResult(state, searchTerm, itemPage ?? 0, id),
-  );
-
-  return item ? (
+  return searchResult ? (
     <ScrollView
       style={[styles.container, { paddingTop: insets.top + spacing.medium }]}>
       <BookCoverImage
-        bookId={item.key}
-        coverId={item.cover_i}
+        bookId={searchResult.key}
+        coverId={searchResult.cover_i}
         preset="detail"
         style={styles.cover}
       />
       <View style={styles.infoContainer}>
-        <BookTitle preset="detail" title={item.title} />
-        <BookAuthors authors={item.author_name} />
-        <BookFirstPublishedIn year={item.first_publish_year} />
-        <BookLanguages languages={item.language} />
-        <BookLists bookId={item.key} />
+        <BookTitle preset="detail" title={searchResult.title} />
+        <BookAuthors authors={searchResult.author_name} />
+        <BookFirstPublishedIn year={searchResult.first_publish_year} />
+        <BookLanguages languages={searchResult.language} />
+        <BookLists bookId={searchResult.key} />
       </View>
     </ScrollView>
   ) : null;

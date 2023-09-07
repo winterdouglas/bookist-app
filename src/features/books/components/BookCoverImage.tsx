@@ -7,7 +7,7 @@ import Animated, {
 import { AutoImage, AutoImageProps } from "@/components/AutoImage";
 import { Config } from "@/config";
 import { spacing, timing } from "@/theme";
-import { useAppTheme } from "@/hooks/useAppTheme";
+import { useAppTheme } from "@/features/theme/hooks/useAppTheme";
 
 export const AnimatedAutoImage = Animated.createAnimatedComponent(AutoImage);
 

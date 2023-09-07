@@ -14,7 +14,7 @@ import {
 import { Storage } from "@/lib/storage";
 import { wishListSlice } from "@/features/books/store/wishListSlice";
 import { readingListSlice } from "@/features/books/store/readingListSlice";
-import { themeSlice } from "@/features/theme/themeSlice";
+import { themeSlice } from "@/features/theme/store/themeSlice";
 
 const reducer = combineReducers({
   search: searchSlice.reducer,
