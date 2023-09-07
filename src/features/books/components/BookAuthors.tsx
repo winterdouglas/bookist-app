@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { Text } from "@/components/Text";
-import { unique } from "@/utils/array";
 import { StyleSheet } from "react-native";
+import { Text } from "@/components/Text";
+import { unique } from "@/utils";
 
 export const BookAuthors: FC<{ authors?: string[] }> = ({ authors = [] }) => {
   const uniqueAuthors = unique(authors);
