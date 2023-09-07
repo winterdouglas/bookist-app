@@ -1,6 +1,6 @@
 import { Api } from "@/services/api";
+import { SearchResultPage } from "@/features/books/models";
 import { SearchApiResultPage } from "./searchApi.types";
-import { SearchResultPage } from "../models";
 
 export const toSearchResultPage = (
   result: SearchApiResultPage,
